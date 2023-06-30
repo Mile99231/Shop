@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App' 
 }
 console.log(12313); 
 console.log(1122);
