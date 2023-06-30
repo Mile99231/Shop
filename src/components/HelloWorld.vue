@@ -10,7 +10,7 @@
       name :'',
       data(){
           return{
-            D:'100'
+            D:'1000'
           }
       },
       methods:{
