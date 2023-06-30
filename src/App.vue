@@ -13,7 +13,7 @@ console.log(1122);
       
 console.log(1122);   
 console.log(1);
-console.log(wowo);
+console.log(wowo); 
  
  
 </script>
