@@ -1,7 +1,7 @@
 <template>
   <div class="ad">
       <el-button type="info">登录</el-button>
-      <p>ssss</p>
+      <p>ssssaa</p>
   </div>    
   </template>
   
