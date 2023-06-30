@@ -10,6 +10,7 @@
       name :'',
       data(){
           return{
+            D:'10'
           }
       },
       methods:{
