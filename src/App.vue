@@ -11,6 +11,7 @@ export default {
 console.log(23); 
 console.log(12312); 
 console.log(sssssssss);    
+console.log(aaaaaaaa);
   
 </script>  
 
