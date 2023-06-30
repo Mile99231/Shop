@@ -10,7 +10,7 @@ export default {
 }
 console.log(23); 
 console.log(2);
-</script>
+</script> 
 
 <style> 
 #app {
