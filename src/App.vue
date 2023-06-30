@@ -16,7 +16,7 @@ console.log(1);
 
 </script>
 
-<style>
+<style> 
 #app {
 
   color: #2c3e50;
