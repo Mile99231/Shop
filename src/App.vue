@@ -11,7 +11,7 @@ export default {
 console.log(12313);
 console.log(1122);
  
-console.log(1122);
+console.log(1122); 
 console.log(1); 
 
 </script>
