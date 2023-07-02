@@ -1,16 +1,16 @@
 <template>
   <div class="ad">
       <el-button type="info">登录</el-button>
-      <p>ssssaasdasda</p>
+      <router-view/>
   </div>    
   </template>
   
   <script>
    export default{
-      name :'',
+      name :'HelloWorld',
       data(){
           return{
-            D:'1000'
+
           }
       },
       methods:{
@@ -22,6 +22,6 @@
    }
   </script>
   
-  <style scoped>
+  <style>
   
   </style>

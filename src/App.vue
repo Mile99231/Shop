@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <router-view/>
     
   </div>
 </template>
@@ -8,10 +9,7 @@
 export default {
   name: 'App'  
 }
-console.log(23); 
-console.log(12312); 
-console.log(sssssssss);    
-console.log(aaaaaaaa);
+
   
 </script>  
 
