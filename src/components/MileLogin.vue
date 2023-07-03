@@ -7,13 +7,15 @@
             <el-input v-model="username" placeholder="请输入内容" class="pass" style="margin-top: 350px;margin-left: 30px;"></el-input><br>
             <el-input placeholder="请输入密码" v-model="password" show-password class="user" style="margin-top: 20px; margin-left: 30px;"></el-input><br>
             <el-button type="primary" style="margin-top: 30px;margin-left: 60px;" @click="login()">登录</el-button>
-            <el-button type="warning" style="margin-left: 70px;">注册</el-button>
+            <el-button type="warning" style="margin-left: 70px;" @click="reg()">注册</el-button>
         </div>
         
     </div>    
     </template>
     
     <script>
+import axios from 'axios';
+
      export default{
         name :'MileLogin',
         data(){
@@ -24,10 +26,19 @@
         },
         methods:{
             login(){
-                this.$message({
+                this.$axios.get("UserServlet?username="+this.username+"&password="+this.password)
+                .then(rs=>{
+                    console.log(rs);
+                    if(rs.data==1){
+                        this.$message({
           message: '登录成功',
-          type: 'success'
-        });
+          type: 'success'})
+                    }else{
+                        this.$message.error('登录失败');
+                    }
+
+})
+          .catch();
             },
             reg(){
                 this.$message({
