@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Demo from '@/components/Demo'
 import Admin from '@/components/Admin'
+import MileLogin from '@/components/MileLogin'
 Vue.use(Router)
 
 export default new Router({
@@ -14,14 +14,14 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path: '/aa',
-      name: 'Demo',
-      component: Demo
-    },
-    {
       path: '/Admin',
       name: 'Admin',
       component: Admin
+    },
+    {
+      path: '/MileLogin',
+      name: 'MileLogin',
+      component: MileLogin
     }
 
   ]
