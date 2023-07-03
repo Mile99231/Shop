@@ -13,9 +13,9 @@ Vue.use(ElementUI);
 
 // 全局注册axios
 import axios from 'axios';
-// axios请求地址公有路径
-// axios.defaults.baseURL="http://localhost:8082/fwgl/"
-// Vue.prototype.$axios = axios
+//axios请求地址公有路径
+axios.defaults.baseURL="http://localhost:8089/End/"
+Vue.prototype.$axios = axios
 
 
 /* eslint-disable no-new */
