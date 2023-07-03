@@ -8,7 +8,7 @@
         <el-input v-model="password" type="password" placeholder="请输入密码"></el-input>
         <el-input v-model="code" placeholder="请输入验证码"></el-input>
         <el-button type="info" @click="login()">登录</el-button>
-        <img id="num" src="http://localhost:8089/End/code" /> 
+        <img id="num" src="http://localhost:8089/End/code" />  
     </div> 
 
 
