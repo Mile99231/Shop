@@ -3,6 +3,12 @@
         <div class="background">
             <img src="../assets/e90664acbb424877adfaa40ca21cd35b.jpeg" width="100%" height="100%">
         </div>
+        <div>
+            <marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#ff0000><b>用 用</b></font></b></marquee>
+<marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#66ff00><b>户 户</b></font></b></marquee>
+<marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#f709f7><b>登 登</b></font></b></marquee>
+<marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#0909f7><b>录 录</b></font></b></marquee>
+        </div>
         <div class="login">
             <el-input v-model="username" placeholder="请输入内容" class="pass" style="margin-top: 350px;margin-left: 30px;"></el-input><br>
             <el-input placeholder="请输入密码" v-model="password" show-password class="user" style="margin-top: 20px; margin-left: 30px;"></el-input><br>
