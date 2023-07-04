@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Admin from '@/components/Admin'
 import MileLogin from '@/components/MileLogin'
 import MileShopLogin from '@/components/MileShopLogin'
+import MileUserMain from '@/components/MileUserMain'
 Vue.use(Router)
 
 export default new Router({
@@ -23,12 +24,16 @@ export default new Router({
       path: '/MileLogin',
       name: 'MileLogin',
       component: MileLogin
-    }
-    ,
+    },
     {
       path: '/MileShopLogin',
       name: 'MileShopLogin',
       component: MileShopLogin
+    },
+    {
+      path: '/MileUserMain',
+      name: 'MileUserMain',
+      component: MileUserMain
     }
 
   ]
