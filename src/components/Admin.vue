@@ -39,7 +39,7 @@
 				if(res.data=="OK"){
                     console.log(res);
                      location.href="https://www.4399.com" //跳转网址
-					alert("用户名正确")
+					alert("用户名正确") 
 								
 				}else{
                     console.log(res);
