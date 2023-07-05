@@ -5,9 +5,9 @@
         </div>
         <div>
             <marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#ff0000><b>商 商</b></font></b></marquee>
-<marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#66ff00><b>家 家</b></font></b></marquee>
-<marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#f709f7><b>登 登</b></font></b></marquee>
-<marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#0909f7><b>录 录</b></font></b></marquee>
+            <marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#66ff00><b>家 家</b></font></b></marquee>
+            <marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#f709f7><b>登 登</b></font></b></marquee>
+            <marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#0909f7><b>录 录</b></font></b></marquee>
         </div>
         <div class="login">
             <el-input v-model="username" placeholder="请输入内容" class="pass" style="margin-top: 350px;margin-left: 30px;"></el-input><br>
@@ -36,8 +36,8 @@ import axios from 'axios';
                     console.log(rs);
                     if(rs.data==1){
                         this.$message({
-          message: '登录成功',
-          type: 'success'})
+                                    message: '登录成功',
+                                    type: 'success'})
                     }else{
                         this.$message.error('登录失败');
                     }

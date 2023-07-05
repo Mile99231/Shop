@@ -13,9 +13,33 @@ Vue.use(ElementUI);
 
 // 全局注册axios
 import axios from 'axios';
-//axios请求地址公有路径
+//axios请求地址公有路径 
 axios.defaults.baseURL="http://localhost:8089/End/"
 Vue.prototype.$axios = axios
+
+//请求拦截器
+/*
+每一次向服务器发送请求，都要携带token,很麻烦
+因此我们可以使用axios拦截器,将每次请求进行拦截
+然后，在当前请求中添加token。这样每次向服务器发送请求都会携带token.
+*/
+axios.interceptors.request.use(function(config){
+  if(sessionStorage.getItem("token")){
+     config.headers['token'] = sessionStorage.getItem("token");
+  }
+  return config;
+},function(error){
+ return Promise.reject("error");
+});
+//响应
+axios.interceptors.response.use(response=>{
+  if(response.data.token){
+    sessionStorage.setItem("token",response.data.token);
+  }
+  return response;
+},error=>{
+  return Promise.reject(error);
+});
 
 
 /* eslint-disable no-new */
