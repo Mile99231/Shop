@@ -1,20 +1,38 @@
 <template>
     <div class="ad">
         <el-container>
-            <el-header style="width: auto; height: 50px; background: #e86b6b;padding: 0px;"><div style="width: 100%;background: #696969; margin-top: 10px;height: 30px;">aaa</div></el-header>
+            <!-- //页头 -->
+            <el-header style="width: auto; height: 50px; background: #faa148;padding: 0px;">
+                <!-- //搜索框 -->
+                <el-input v-model="title" placeholder="请输入内容" style="width: 300px; margin-left: 40%; margin-top: 5px;"></el-input>
+                <el-button icon="el-icon-search" circle @click="sosuo()"></el-button>
+
+                <el-dropdown @command="handleCommand" >
+                    <span class="el-dropdown-link" style="margin-left: 500px;">{{ name }}<i class="el-icon-arrow-down el-icon--right"></i></span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item command="a" >个人信息</el-dropdown-item> 
+                        <el-dropdown-item command="b" >退出</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </el-header>
+
+
+            <!-- //页体 -->
              <el-main style="background-color: #ffffff; width: 100%;height: auto; ">
             <div>
-                <el-carousel height="613px" direction="vertical" :autoplay="false">
+                <!-- 轮播图 -->
+                <el-carousel height="413px" direction="vertical" :autoplay="false">
                     <el-carousel-item v-for="item in page" :key=item.id>
-                        <img :src=item.imageurl :title="item.title" style="height: 613px; width: 1530px;">
+                        <img :src=item.imageurl :title="item.title" style="height: 450px; width: 1550px;">
                     </el-carousel-item>
                 </el-carousel>
             </div>
+            <!-- 全部商品信息 -->
             <div style="height: 400px;">
                 <div style="height: 400px; width: 1050px; margin-left: 300px;">
                     <ul style="height: 300px; width: 150px;list-style: none; list-style-type: disc; float: left; margin: 20px 30px;" v-for="item in allShopa" :key="item.id">
                         <li style="display: list-item;">
-                            <div>
+                            <div @click="tiao(item)">
                                 <img :src="item.pmainimage" height="300px" width="210px" :title="item.title">
                             </div>
                             <h6 style="margin-top: -5px; color: #fe7535; ;">￥{{ item.price }} {{ item.pname }}</h6>
@@ -22,6 +40,7 @@
                     </ul>
                 </div>
             </div>
+
             </el-main>
         </el-container>
     </div>    
@@ -33,10 +52,13 @@
         data(){
             return{
                 page:[],
-                allShopa:[]
+                allShopa:[],
+                title:"",
+                name:""
             }
         },
         methods:{
+            // 轮播图方法
             lunbo(){
                 this.$axios
             .get("LunBoServlet")
@@ -45,6 +67,7 @@
             })
             .catch()
         },
+        // 查询全部商品信息
         allShop(){
             this.$axios
             .get("ProductServlet")
@@ -52,10 +75,47 @@
                 this.allShopa=rs.data
             })
             .catch()
+        },
+        //搜索商品信息
+        sosuo(){
+            this.$axios
+            .get("SoSuoServlet?title="+this.title)
+            .then(rs=>{
+                this.allShopa=rs.data;
+            })
+            .catch()
+        },
+        exit(){
+            sessionStorage.clear();
+            this.$router.push("/MileLogin");            //跳转到登录MileLogin页面。。。。。。。。。。。。。。
+        },
+        // 页头 个人信息
+        handleCommand(c){
+            if(c==='a'){
+                if(sessionStorage.getItem("user")!=null){
+                    this.$router.push('/MileUserMain');
+                }else{
+                    this.$message.error("请先登录");
+                    this.$router.push('/MileLogin');
+                }
+            }
+            if(c==='b'){
+                this.exit();
+            }
+        },
+        // 跳转至订单信息
+        tiao(item){
+            if(sessionStorage.getItem("user")!=null){
+                this.$router.push({name:'MileOrder',params:item});            //跳转到MileUserMain页面。。。。。。。。。。。。
+            }else{
+                this.$message.error("请先登录");
+                this.$router.push('/MileLogin');
+            }
         }
 
         },
         created(){
+            this.name=sessionStorage.getItem("user");            //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
             this.lunbo();
             this.allShop();
         }

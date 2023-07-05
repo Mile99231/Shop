@@ -1,19 +1,20 @@
 <template>
     <div class="ad">
-        <div class="background">
+        <div class="background" style="height: 100%;">
             <img src="../assets/e90664acbb424877adfaa40ca21cd35b.jpeg" width="100%" height="100%">
         </div>
-        <div>
-            <marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#ff0000><b>用 用</b></font></b></marquee>
-<marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#66ff00><b>户 户</b></font></b></marquee>
-<marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#f709f7><b>登 登</b></font></b></marquee>
-<marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#0909f7><b>录 录</b></font></b></marquee>
-        </div>
         <div class="login">
-            <el-input v-model="username" placeholder="请输入内容" class="pass" style="margin-top: 350px;margin-left: 30px;"></el-input><br>
-            <el-input placeholder="请输入密码" v-model="password" show-password class="user" style="margin-top: 20px; margin-left: 30px;"></el-input><br>
-            <el-button type="primary" style="margin-top: 30px;margin-left: 60px;" @click="login()">登录</el-button>
-            <el-button type="warning" style="margin-left: 70px;" @click="reg()">注册</el-button>
+            <el-form ref="user" :model="user" label-width="80px">
+            <el-form-item prop="loginname" >
+
+            账号:<el-input v-model="user.loginname" placeholder="请输入账号" class="pass" style="margin-top: 350px;margin-left: 30px;"></el-input><br>
+            </el-form-item>
+            <el-form-item prop="pwd" >
+            密码:<el-input placeholder="请输入密码" v-model="user.pwd" show-password class="user" style="margin-top: 20px; margin-left: 30px;"></el-input><br>
+            </el-form-item>
+            <el-button type="primary" style="margin-top: 30px;margin-left: 150px;" @click="login('user')">登录</el-button>
+            <el-button type="warning" style="margin-left: 120px;" @click="reg()">注册</el-button>
+            </el-form>
         </div>
         
     </div>    
@@ -26,19 +27,20 @@ import axios from 'axios';
         name :'MileLogin',
         data(){
             return{
-                username: '',
-                password:''
+                user:{loginname:"",pwd:""}
             }
         },
         methods:{
-            login(){
-                this.$axios.get("UserServlet?username="+this.username+"&password="+this.password)
+            login(formName){
+                this.$axios.get("UserServlet?username="+this.user.loginname+"&password="+this.user.pwd)
                 .then(rs=>{
                     console.log(rs);
                     if(rs.data==1){
                         this.$message({
-          message: '登录成功',
-          type: 'success'})
+                        message: '登录成功',
+                        type: 'success'})
+                        sessionStorage.setItem('user',JSON.stringify(this.user.loginname))//将用户信息存储到session中。这样你的
+                        this.$router.push('/MileUserMain');
                     }else{
                         this.$message.error('登录失败');
                     }

@@ -5,6 +5,7 @@ import Admin from '@/components/Admin'
 import MileLogin from '@/components/MileLogin'
 import MileShopLogin from '@/components/MileShopLogin'
 import MileUserMain from '@/components/MileUserMain'
+import MileOrder from '@/components/MileOrder'
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +35,11 @@ export default new Router({
       path: '/MileUserMain',
       name: 'MileUserMain',
       component: MileUserMain
+    },
+    {
+      path: '/MileOrder',
+      name: 'MileOrder',
+      component: MileOrder
     }
 
   ]
