@@ -25,7 +25,7 @@ let router= new Router({
     {
       path: '/Admin',
       name: 'Admin',
-      component: Admin,
+      component: Admin, 
     },
     {
       path: '/AdminMain',

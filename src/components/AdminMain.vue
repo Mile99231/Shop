@@ -23,7 +23,7 @@
     <el-container>
 
         <!-- 侧边栏 -->
-      <el-aside width="200px">
+      <el-aside width="200px"> 
       <el-menu >
           <el-menu-item index="1-1">个人信息</el-menu-item>
 

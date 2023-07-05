@@ -61,7 +61,7 @@
                 if(valid){
                 this.$axios.get("AdminServlet?",{params: this.user})
                 .then(res=>{
-                    if(res.data=="OK"){
+                    if(res.data=="OK"){ 
                         this.$message({message: "登录成功",type: "success"});
                         sessionStorage.setItem('username',JSON.stringify(res.config.params.username));
                         this.$router.push("/AdminMain")
