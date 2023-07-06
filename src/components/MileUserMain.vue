@@ -23,7 +23,7 @@
                 <!-- 轮播图 -->
                 <el-carousel height="413px" direction="vertical" :autoplay="false">
                     <el-carousel-item v-for="item in page" :key=item.id>
-                        <img :src=item.imageurl :title="item.title" style="height: 450px; width: 1550px;">
+                        <img :src=item.imageurl :title="item.title" style="height: 450px; width: 1800px;">
                     </el-carousel-item>
                 </el-carousel>
             </div>
