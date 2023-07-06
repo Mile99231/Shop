@@ -81,6 +81,7 @@
             this.$axios
             .get("SoSuoServlet?title="+this.title)
             .then(rs=>{
+                console.log(rs);
                 this.allShopa=rs.data;
             })
             .catch()
@@ -107,6 +108,7 @@
         tiao(item){
             if(sessionStorage.getItem("user")!=null){
                 this.$router.push({name:'MileOrder',params:item});            //跳转到MileUserMain页面。。。。。。。。。。。。
+                
             }else{
                 this.$message.error("请先登录");
                 this.$router.push('/MileLogin');
