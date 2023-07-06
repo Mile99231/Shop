@@ -9,7 +9,7 @@
   <!-- <el-button type="info" plain  @click="loginout">退出</el-button> -->
 
   <el-dropdown @command="handleCommand">
-  <span class="el-dropdown-link">
+  <span  class="el-dropdown-link">
     {{loginuser}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
@@ -24,18 +24,27 @@
 
         <!-- 侧边栏 -->
       <el-aside width="200px"> 
-      <el-menu >
-          <el-menu-item index="1-1">个人信息</el-menu-item>
+      <el-menu > 
+          <el-menu-item index="1-1">管理员个人信息</el-menu-item>
 
-          <el-menu-item index="1-2">用户信息</el-menu-item>
+          <el-menu-item index="1-2">商家信息</el-menu-item>
         
-          <el-menu-item index="1-3">商家信息</el-menu-item>
-        <el-submenu index="1-4">
-          <template slot="title">货物信息</template>
-          <el-menu-item index="1-4-1">物流详情</el-menu-item>
-          <el-menu-item index="1-4-2">库存详情</el-menu-item>
-          <el-menu-item index="1-4-3">销量详情</el-menu-item>
-        </el-submenu>
+          <el-menu-item index="1-3">用户信息</el-menu-item>
+       
+          <el-submenu v-for="item in menulist" :index="item.id" :key="item.id">
+        <template slot="title">
+          <i :class="item.icon"></i>
+          <span>{{item.name}}</span> 
+        </template>
+        <!-- 二级菜单 -->
+        <el-menu-item v-for="subItem in item.child" :index="subItem.path" :key="subItem.path">
+          <template slot="title">
+          <i :class="subItem.icon"></i>
+          <span>{{subItem.name}}</span> 
+        </template>
+        </el-menu-item>
+
+    </el-submenu>
     </el-menu>
 </el-aside>
 
@@ -54,8 +63,56 @@
         data(){
             return{
               loginuser:{
-
-}
+            },
+            menulist:[
+         {
+            name:'商品管理',
+            icon:'el-icon-s-custom',
+            id:'1',
+            child:[{
+              name:'商品列表',
+              icon:'el-icon-menu',
+              path:'/user/list'
+            },
+            {
+              name:'添加商品',
+              icon:'el-icon-folder-add',
+              path:'/user/add'
+            },
+            {
+              name:'商品类别',
+              icon:'el-icon-folder-add',
+              path:'/user/add'
+            },
+           
+           
+            ]
+          },
+          {
+            name:'订单管理',
+            icon:'el-icon-s-custom',
+            id:'2',
+            child:[{
+              name:'订单列表',
+              icon:'el-icon-menu',
+              path:'/user/list'
+            },
+           
+            ]
+          },
+          {
+            name:'数据统计',
+            icon:'el-icon-s-custom',
+            id:'3',
+            child:[{
+              name:'销量排行',
+              icon:'el-icon-menu',
+              path:'/user/list'
+            },
+           
+            ]
+          }
+        ],
             }
         },
         methods:{
@@ -93,7 +150,7 @@
      height: 100%;
     }
     .el-header {
-      background-color: #373d41;
+    background-color: #373d41;
     display:flex;    /*弹性布局*/ 
     justify-content: space-between; /*子元素分边显示 */
     align-items: center; /*子元素居中显示 */
@@ -123,7 +180,4 @@
     cursor: pointer;
     letter-spacing: 0.3em;
   }
-
-   
-
-    </style>
+</style>
