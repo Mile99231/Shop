@@ -23,33 +23,36 @@
     <el-container>
 
         <!-- 侧边栏 -->
-      <el-aside width="200px"> 
+      <el-aside  width="200px"> 
       <el-menu > 
-          <el-menu-item index="1-1">管理员个人信息</el-menu-item>
+          <el-menu-item index="/SelAdmin">管理员个人信息</el-menu-item>
 
           <el-menu-item index="1-2">商家信息</el-menu-item>
         
           <el-menu-item index="1-3">用户信息</el-menu-item>
        
-          <el-submenu v-for="item in menulist" :index="item.id" :key="item.id">
+          <!-- <el-submenu v-for="item in menulist" :index="item.id" :key="item.id">
         <template slot="title">
           <i :class="item.icon"></i>
           <span>{{item.name}}</span> 
-        </template>
+        </template> -->
         <!-- 二级菜单 -->
-        <el-menu-item v-for="subItem in item.child" :index="subItem.path" :key="subItem.path">
+        <!-- <el-menu-item v-for="subItem in item.child" :index="subItem.path" :key="subItem.path">
           <template slot="title">
           <i :class="subItem.icon"></i>
           <span>{{subItem.name}}</span> 
         </template>
         </el-menu-item>
 
-    </el-submenu>
+    </el-submenu> -->
     </el-menu>
 </el-aside>
 
-      <el-container>
-        <el-main>Main</el-main>
+      <el-container >
+        <div class="cont">
+        <router-view></router-view>
+      
+      </div>
 
       </el-container>
     </el-container>
@@ -72,17 +75,17 @@
             child:[{
               name:'商品列表',
               icon:'el-icon-menu',
-              path:'/user/list'
+              // path:'/user/list'
             },
             {
               name:'添加商品',
               icon:'el-icon-folder-add',
-              path:'/user/add'
+              // path:'/user/add'
             },
             {
               name:'商品类别',
               icon:'el-icon-folder-add',
-              path:'/user/add'
+              // path:'/user/add'
             },
            
            
@@ -95,7 +98,7 @@
             child:[{
               name:'订单列表',
               icon:'el-icon-menu',
-              path:'/user/list'
+              // path:'/user/list'
             },
            
             ]
@@ -107,7 +110,7 @@
             child:[{
               name:'销量排行',
               icon:'el-icon-menu',
-              path:'/user/list'
+              // path:'/user/list'
             },
            
             ]
@@ -145,6 +148,7 @@
     }
     .el-container {
      height: 100%;
+     width: 100%;
     }
     .el-menu{
      height: 100%;
