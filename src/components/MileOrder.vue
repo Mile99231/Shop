@@ -4,7 +4,7 @@
             <!-- //页头 -->
             <el-header style="width: auto; height: 50px; background: #faa148;padding: 0px;">
                 <el-dropdown @command="handleCommand" >
-                    <span class="el-dropdown-link" style="margin-left: 1500px;">{{ name }}<i class="el-icon-arrow-down el-icon--right"></i></span>
+                    <span class="el-dropdown-link" style="margin-left: 1500px;">{{ user }}<i class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="a" >个人信息</el-dropdown-item> 
                         <el-dropdown-item command="b" >退出</el-dropdown-item>
@@ -14,9 +14,19 @@
 
 
             <!-- //页体 -->
-             <el-main style="background-color: #ffffff; width: 100%;height: auto; ">
-                <div style="background-color: red; width: 900px; height: 600px; margin-left: 300px;">
-                    {{ this.$route.params.pname }}
+             <el-main style="background-color: #f7a2a2; width: 100%;height: auto; ">
+                <div style="background-color: #f7a2a2; width: 900px; height: 600px; margin-left: 300px; ">
+                    <div style="width: 350px; height: 400px; background-color: #601c1c; float: left;"><img :src="this.$route.params.pmainimage" style="width: 350px; height: 400px;"></div>
+                    <div style="color: #392121;background-color: #d79191; height: 400px; margin-left: 500px;">
+                         <div style="text-align: center;"><h3 >{{ this.$route.params.pname }}</h3></div><br><br>
+                        <div style="color: #8f4902;text-align: center;"><h4>{{ this.$route.params.price }}元</h4></div><br><br>
+                        <div style="text-align: center;"><h4>剩余数量:{{ this.$route.params.pstock }}辆</h4></div><br><br>
+                        <div style="text-align: center;">在售状态{{ this.$route.params.status }}</div><br><br>
+                        <template>
+                            <el-input-number v-model="num" :min="1" :max="10" label="描述文字" style="margin-left: 110px;"></el-input-number>
+                        </template><br><br><br>
+                        <el-button type="success" @click="addShop" style="margin-left: 150px;">购买</el-button>
+                    </div>
                 </div>
 
             </el-main>
@@ -31,8 +41,11 @@
             return{
                 page:[],
                 allShopa:[],
-                title:"",
-                name:""
+                user:"",/*用户名称 */
+                num:1,/*购买数量 */
+                price:this.$route.params.price,/*价格 */
+                dname: this.$route.params.pname/*商品名称 */
+
             }
         },
         methods:{
@@ -54,12 +67,23 @@
             if(c==='b'){
                 this.exit();
             }
+        },
+        addShop(){
+            this.$axios.get("OrderServlet?user="+this.user+"&dname="+this.dname+"&num="+this.num+"&price="+this.price)
+            .then(rs=>{
+                if(rs.data==1){
+                    this.$message({message: '购买成功',type: 'success'});
+                }else{
+                    this.$message.error("购买失败");
+                }
+            })
+            .catch()
         }
 
         },
         created(){
-            this.name=sessionStorage.getItem("user");         //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
-            
+            this.user=JSON.parse(sessionStorage.getItem('user'));      //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
+            console.log(this.price);
         }
      }
     </script>
