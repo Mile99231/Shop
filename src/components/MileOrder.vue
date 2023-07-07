@@ -16,7 +16,7 @@
             <!-- //页体 -->
              <el-main style="background-color: #ffffff; width: 100%;height: auto; ">
                 <div style="background-color: red; width: 900px; height: 600px; margin-left: 300px;">
-
+                    {{ this.$route.params.pname }}
                 </div>
 
             </el-main>
@@ -54,19 +54,12 @@
             if(c==='b'){
                 this.exit();
             }
-        },
-        tiao(item){
-            if(sessionStorage.getItem("user")!=null){
-                this.$router.push({name:'MileUserMain',params:item});            //跳转到MileUserMain页面。。。。。。。。。。。。
-            }else{
-                this.$message.error("请先登录");
-                this.$router.push('/MileLogin');
-            }
         }
 
         },
         created(){
-            this.name=sessionStorage.getItem("user");            //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
+            this.name=sessionStorage.getItem("user");         //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
+            
         }
      }
     </script>

@@ -23,7 +23,7 @@
                 <!-- 轮播图 -->
                 <el-carousel height="413px" direction="vertical" :autoplay="false">
                     <el-carousel-item v-for="item in page" :key=item.id>
-                        <img :src=item.imageurl :title="item.title" style="height: 450px; width: 1550px;">
+                        <img :src=item.imageurl :title="item.title" style="height: 450px; width: 1800px;">
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -81,6 +81,7 @@
             this.$axios
             .get("SoSuoServlet?title="+this.title)
             .then(rs=>{
+                console.log(rs);
                 this.allShopa=rs.data;
             })
             .catch()
@@ -107,6 +108,7 @@
         tiao(item){
             if(sessionStorage.getItem("user")!=null){
                 this.$router.push({name:'MileOrder',params:item});            //跳转到MileUserMain页面。。。。。。。。。。。。
+                
             }else{
                 this.$message.error("请先登录");
                 this.$router.push('/MileLogin');
