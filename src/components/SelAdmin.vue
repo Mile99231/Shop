@@ -61,7 +61,7 @@
     name: 'App',
     data(){
          return{
-            AdminInfo:[]
+            AdminInfo:[] 
             }
         },
         methods:{
