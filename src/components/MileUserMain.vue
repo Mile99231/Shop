@@ -115,7 +115,7 @@
 
         },
         created(){
-            this.name=sessionStorage.getItem("user");            //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
+            this.name=JSON.parse(sessionStorage.getItem('user'));            //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
             this.lunbo();
             this.allShop();
         }
