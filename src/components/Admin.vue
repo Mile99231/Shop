@@ -21,7 +21,7 @@
                  <el-input  v-model="user.code" placeholder="请输入验证码"></el-input>
             </el-form-item>
             
-
+ 
             <el-form-item>
             <el-button type="info" @click="login('user')">登录</el-button>
             <el-button  @click="resetForm('user')" >重置</el-button>
