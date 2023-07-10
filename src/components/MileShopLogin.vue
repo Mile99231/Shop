@@ -9,13 +9,13 @@
             <marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#66ff00><b>家 家</b></font></b></marquee>
             <marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#f709f7><b>登 登</b></font></b></marquee>
             <marquee scrollamount=2 width=80 height=95 scrolldely="10" align="center"><b><font style="font-weight: normal; font-size: 60pt; line-height: normal; font-style: normal; font-variant: normal" face=华文彩云 color=#0909f7><b>录 录</b></font></b></marquee>
-        </div>
+        </div> 
         <div class="login">
             <el-input v-model="username" placeholder="请输入内容" class="pass" style="margin-top: 350px;margin-left: 30px;"></el-input><br>
             <el-input placeholder="请输入密码" v-model="password" show-password class="user" style="margin-top: 20px; margin-left: 30px;"></el-input><br>
             <el-button type="primary" style="margin-top: 30px;margin-left: 150px;" @click="login()">登录</el-button>
         </div>
-        
+                
     </div>    
     </template>
     
