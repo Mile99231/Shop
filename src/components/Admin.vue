@@ -9,12 +9,12 @@
         <div>
         <el-form ref="user" :model="user" label-width="80px" :rules="rules" >
 
-            <el-form-item prop="username"  label="账号">
-                <el-input  v-model="user.username" placeholder="请输入账号"></el-input>
+            <el-form-item  prop="username"  label="账号">
+                <el-input prefix-icon="el-icon-user"  v-model="user.username" placeholder="请输入账号"></el-input>
             </el-form-item>
 
             <el-form-item prop="password" label="密码">
-                <el-input  v-model="user.password" type="password" placeholder="请输入密码"></el-input>
+                <el-input prefix-icon="el-icon-user-solid"  v-model="user.password" type="password" placeholder="请输入密码"></el-input>
             </el-form-item>
 
             <el-form-item prop="code"  label="验证码">
@@ -42,7 +42,7 @@
             return{
                 user:{
                     username:"",
-				    password:"",
+				    password:"", 
                     code:"",
                 },
                
