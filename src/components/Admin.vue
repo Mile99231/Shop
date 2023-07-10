@@ -42,7 +42,7 @@
             return{
                 user:{
                     username:"",
-				    password:"",
+				    password:"", 
                     code:"",
                 },
                

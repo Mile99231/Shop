@@ -34,7 +34,7 @@
           <!-- <el-submenu v-for="item in menulist" :index="item.id" :key="item.id">
         <template slot="title">
           <i :class="item.icon"></i>
-          <span>{{item.name}}</span> 
+          <span>{{item.name}}</span>  
         </template> -->
         <!-- 二级菜单 -->
         <!-- <el-menu-item v-for="subItem in item.child" :index="subItem.path" :key="subItem.path">
