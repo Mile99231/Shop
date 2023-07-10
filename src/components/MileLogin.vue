@@ -32,7 +32,7 @@ import axios from 'axios';
         },
         methods:{
             login(formName){
-                this.$axios.get("UserServlet?username="+this.user.loginname+"&password="+this.user.pwd)
+                this.$axios.get("UserLoginServlet?username="+this.user.loginname+"&password="+this.user.pwd)
                 .then(rs=>{
                     console.log(rs);
                     if(rs.data==1){

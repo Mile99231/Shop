@@ -40,7 +40,8 @@ axios.interceptors.response.use(response=>{
 },error=>{
   return Promise.reject(error);
 });
-
+// //在跨域请求时 会携带用户凭证
+// axios.defaults.withCredentials = true;
 
 /* eslint-disable no-new */
 new Vue({

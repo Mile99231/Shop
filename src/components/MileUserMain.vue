@@ -94,7 +94,7 @@
         handleCommand(c){
             if(c==='a'){
                 if(sessionStorage.getItem("user")!=null){
-                    this.$router.push('/MileUserMain');
+                    this.$router.push('/MileUser');
                 }else{
                     this.$message.error("请先登录");
                     this.$router.push('/MileLogin');
