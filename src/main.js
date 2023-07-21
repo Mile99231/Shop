@@ -14,8 +14,10 @@ Vue.use(ElementUI);
 // 全局注册axios
 import axios from 'axios';
 //axios请求地址公有路径 
-axios.defaults.baseURL="http://localhost:8089/End/"
+axios.defaults.baseURL="http://localhost:8089/shop/admin/"
 Vue.prototype.$axios = axios
+axios.defaults.withCredentials=true;
+
 
 //请求拦截器
 /*
