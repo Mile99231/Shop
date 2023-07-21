@@ -64,7 +64,7 @@
                 if(valid){
                 this.$axios.post("checkVerify",{params: this.user.inputStr})
                 .then(res=>{
-                if(res.data===true){ 
+                if(res.data===true){  
                 this.$axios.get("login.action",{params: this.user})
                 .then(res=>{
                     if(res.data.errorcode===0){

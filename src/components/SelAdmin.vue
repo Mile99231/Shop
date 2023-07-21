@@ -17,7 +17,7 @@
 				</el-form-item>
 				<el-form-item label="性别" :label-width="formLabelWidth">
 				  <el-input v-model="AdminInfos.sex"   autocomplete="off"></el-input>
-				</el-form-item>
+				</el-form-item> 
 				<el-form-item label="年龄" :label-width="formLabelWidth">
 				  <el-input v-model="AdminInfos.age" autocomplete="off"></el-input>
 				</el-form-item>
