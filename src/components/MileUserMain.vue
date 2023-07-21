@@ -11,6 +11,7 @@
                     <span class="el-dropdown-link" style="margin-left: 500px;">{{ name }}<i class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="a" >个人信息</el-dropdown-item> 
+                        <el-dropdown-item command="d" >订单信息</el-dropdown-item> 
                         <el-dropdown-item command="b" >退出</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -61,7 +62,7 @@
             // 轮播图方法
             lunbo(){
                 this.$axios
-            .get("LunBoServlet")
+            .get("lunbo/a.action")
             .then(rs=>{
                 this.page=rs.data
             })
@@ -70,7 +71,7 @@
         // 查询全部商品信息
         allShop(){
             this.$axios
-            .get("ProductServlet")
+            .get("product/all.action")
             .then(rs=>{
                 this.allShopa=rs.data
             })
@@ -79,13 +80,14 @@
         //搜索商品信息
         sosuo(){
             this.$axios
-            .get("SoSuoServlet?title="+this.title)
+            .get("product/selById.action?title="+this.title)
             .then(rs=>{
                 console.log(rs);
                 this.allShopa=rs.data;
             })
             .catch()
         },
+        //退出
         exit(){
             sessionStorage.clear();
             this.$router.push("/MileLogin");            //跳转到登录MileLogin页面。。。。。。。。。。。。。。
@@ -103,6 +105,14 @@
             if(c==='b'){
                 this.exit();
             }
+            if(c==='d'){
+                if(sessionStorage.getItem("user")!=null){
+                    this.$router.push('/MileUser');
+                }else{
+                    this.$message.error("请先登录");
+                    this.$router.push('/MileLogin');
+                }
+            }
         },
         // 跳转至订单信息
         tiao(item){
@@ -114,7 +124,7 @@
                 this.$router.push('/MileLogin');
             }
         }
-
+        //初始化
         },
         created(){
             this.name=JSON.parse(sessionStorage.getItem('user'));            //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。

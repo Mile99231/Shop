@@ -8,6 +8,7 @@ import MileUserMain from '@/components/MileUserMain'
 import MileOrder from '@/components/MileOrder'
 import AdminMain from '@/components/AdminMain'
 import MileUser from '@/components/MileUser'
+import MileMyOrder from '@/components/MileMyOrder'
 Vue.use(Router)
 
 const originalPush = Router.prototype.push
@@ -58,6 +59,11 @@ let router= new Router({
       path: '/MileUser',
       name: 'MileUser',
       component: MileUser
+    },
+    {
+      path: '/MileMyOrder',
+      name: 'MileMyOrder',
+      component: MileMyOrder
     }
 
   ]

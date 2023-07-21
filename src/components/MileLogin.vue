@@ -32,10 +32,10 @@ import axios from 'axios';
         },
         methods:{
             login(formName){
-                this.$axios.get("UserLoginServlet?username="+this.user.loginname+"&password="+this.user.pwd)
+                this.$axios.get("User/userLogin.action?uname="+this.user.loginname+"&upwd="+this.user.pwd)
                 .then(rs=>{
                     console.log(rs);
-                    if(rs.data==1){
+                    if(rs.data.errorcode==1){
                         this.$message({
                         message: '登录成功',
                         type: 'success'})

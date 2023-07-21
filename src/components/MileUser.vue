@@ -151,17 +151,11 @@
         },
         //添加收获地址
         add(){
-            let fd = new FormData();
-            fd.append("name",this.form.name);
-            fd.append("radio",this.form.radio);
-            fd.append("phone",this.form.phone);
-            fd.append("addrss",this.form.addrss);
-            fd.append("user",this.form.user);
 
             this.$axios
-            .post("AddaddrssServlet",fd)
+            .get("address/add.action?name="+this.form.name+"&radio="+this.form.radio+"&phone="+this.form.phone+"&addrss="+this.form.addrss+"&user="+this.form.user)
             .then(rs=>{
-                if(rs.data==1){
+                if(rs.data.errorcode==1){
                     this.$message({
                         message: '恭喜你，这是一条成功消息',
                         type: 'success'
@@ -175,13 +169,13 @@
         },
         //查询收货地址
         select(){
-            this.dialogTableVisible = true;
+            this.dialogTableVisible = true; 
 
             this.$axios
-            .get("SelectAddressServlet?name="+this.name)
+            .get("address/sel.action?name="+this.name)
             .then(rs=>{
                 console.log(rs);
-                this.gridData = rs.data;
+                this.gridData = rs.data.data;
             })
             .catch()
         }

@@ -44,7 +44,8 @@
                 user:"",/*用户名称 */
                 num:1,/*购买数量 */
                 price:this.$route.params.price,/*价格 */
-                dname: this.$route.params.pname/*商品名称 */
+                dname: this.$route.params.pname,/*商品名称 */
+                proid:this.$route.params.proid
 
             }
         },
@@ -69,10 +70,11 @@
             }
         },
         addShop(){
-            this.$axios.get("OrderServlet?user="+this.user+"&dname="+this.dname+"&num="+this.num+"&price="+this.price)
+            this.$axios.get("order/add.action?user="+this.user+"&dname="+this.dname+"&num="+this.num+"&price="+this.price+"&proid="+this.proid)
             .then(rs=>{
-                if(rs.data==1){
+                if(rs.data.errorcode==1){
                     this.$message({message: '购买成功',type: 'success'});
+                    console.log(this.proid);
                 }else{
                     this.$message.error("购买失败");
                 }
