@@ -3,8 +3,8 @@
 		<el-button @click="add()">添加</el-button>
 		<el-dialog title="添加" :visible.sync="dialogFormVisible1">
 			<el-form :model="AdminInfos">
-				<el-form-item label="id" :label-width="formLabelWidth">
-				  <el-input  v-model="AdminInfos.id"  autocomplete="off"></el-input>
+				<el-form-item label="id" :label-width="formLabelWidth" >
+				  <el-input  v-model="AdminInfos.id" disabled placeholder="无需填写此项"  autocomplete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="账号" :label-width="formLabelWidth">
 				  <el-input  v-model="AdminInfos.username"  autocomplete="off"></el-input>
@@ -17,7 +17,7 @@
 				</el-form-item>
 				<el-form-item label="性别" :label-width="formLabelWidth">
 				  <el-input v-model="AdminInfos.sex"   autocomplete="off"></el-input>
-				</el-form-item>
+				</el-form-item> 
 				<el-form-item label="年龄" :label-width="formLabelWidth">
 				  <el-input v-model="AdminInfos.age" autocomplete="off"></el-input>
 				</el-form-item>
@@ -152,7 +152,7 @@
         methods:{
 			//查询所有
             sel(){
-                this.$axios.get("SelAdminServlet")
+                this.$axios.get("SelAdmin.action")
                 .then(res=>{
                     this.AdminInfo=res.data;
                     console.log(res.data);
@@ -160,35 +160,24 @@
             },
 			//删除
 			del(row){
-				this.$axios.get("DelAdminServlet?id="+row.id)
+				this.$axios.get("DelAdmin.action?id="+row.id)
                 .then(res=>{
-					if(res.data=="OK"){
+					if(res.data.errorcode===0){
 						this.$message({
           							showClose: true,
           							message: '删除成功',
           							type: 'success'
         							});
+									this.sel();
 					}                
                 }).catch(err => console.log(err));  
 				this.sel();
 			},
 			//执行修改操作
 			update(){
-				let fd = new FormData();
-				fd.append('id',this.AdminInfos.id);
-				fd.append('username', this.AdminInfos.username);
-				fd.append('password', this.AdminInfos.password);
-				fd.append('name',this.AdminInfos.name);
-				fd.append('sex',this.AdminInfos.sex);
-				fd.append('age', this.AdminInfos.age);
-				fd.append('idcard',this.AdminInfos.idcard);
-				fd.append('phone',this.AdminInfos.phone);
-
-				this.$axios.post("KkUpdAdminServlet",fd)
+				this.$axios.post("UpdAdmin.action",this.AdminInfos)
                 .then(res=>{
-					console.log(res.data);
-				if(res.data=="OK"){
-				
+				if(res.data.errorcode===0){
 				    this.$message({
 				          showClose: true,
 				          message: '修改成功',
@@ -207,20 +196,9 @@
 			},
 				//添加
 				addInfo(){
-				let fd = new FormData();
-				fd.append('id',this.AdminInfos.id);
-				fd.append('username', this.AdminInfos.username);
-				fd.append('password', this.AdminInfos.password);
-				fd.append('name',this.AdminInfos.name);
-				fd.append('sex',this.AdminInfos.sex);
-				fd.append('age', this.AdminInfos.age);
-				fd.append('idcard',this.AdminInfos.idcard);
-				fd.append('phone',this.AdminInfos.phone);
-
-				this.$axios.post("KkAddAdminServlet",fd)
+				this.$axios.post("AddAdmin.action",this.AdminInfos)
                 .then(res=>{
-					console.log(this.AdminInfos.username);
-				if(res.data=="OK"){
+				if(res.data.errorcode===0){
 				
 				    this.$message({
 				          showClose: true,

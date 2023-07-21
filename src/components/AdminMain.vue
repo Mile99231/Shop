@@ -24,12 +24,18 @@
 
         <!-- 侧边栏 -->
       <el-aside  width="200px"> 
-      <el-menu > 
+      <el-menu 
+      background-color="#333744" 
+        text-color="#fff" 
+        :collapse-transition='false' 
+        class="el-menu-vertical-demo"
+         unique-opened :router = 'true'
+        :default-active="$route.path"> 
           <el-menu-item index="/SelAdmin">管理员个人信息</el-menu-item>
 
-          <el-menu-item index="1-2">商家信息</el-menu-item>
+          <el-menu-item index="/SelBusiness">商家信息</el-menu-item>
         
-          <el-menu-item index="1-3">用户信息</el-menu-item>
+          <el-menu-item index="SelUser">用户信息</el-menu-item>
        
           <!-- <el-submenu v-for="item in menulist" :index="item.id" :key="item.id">
         <template slot="title">
@@ -85,7 +91,7 @@
             {
               name:'商品类别',
               icon:'el-icon-folder-add',
-              // path:'/user/add'
+              // path:'/user/add' 
             },
            
            

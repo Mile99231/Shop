@@ -17,15 +17,15 @@
                 <el-input prefix-icon="el-icon-user-solid"  v-model="user.password" type="password" placeholder="请输入密码"></el-input>
             </el-form-item>
 
-            <el-form-item prop="code"  label="验证码">
-                 <el-input  v-model="user.code" placeholder="请输入验证码"></el-input>
+            <el-form-item prop="inputStr"  label="验证码">
+                 <el-input  v-model="user.inputStr" placeholder="请输入验证码"></el-input>
             </el-form-item>
             
  
             <el-form-item>
             <el-button type="info" @click="login('user')">登录</el-button>
             <el-button  @click="resetForm('user')" >重置</el-button>
-            <img id="exchangecode" :src="imgurl" />
+            <img :src="imgurl" alt="">
             <a href="#" @click="yanzheng()">看不清?换一张</a>
             </el-form-item>
         </el-form>
@@ -43,46 +43,57 @@
                 user:{
                     username:"",
 				    password:"", 
-                    code:"",
+                    inputStr:""
+                    
                 },
+       
                
                 imgurl:"",
                 rules:{
                         username:[{ required: true, message: '请输入账号', trigger: 'blur' }],
                         password:[{ required: true, message: '请输入密码', trigger: 'blur' },
                                   { min: 3, max: 6, message: '长度在 3 到 6 个字符', trigger: 'blur' }],
-                        // code:[{required: true, message: '请输入验证码', trigger: 'blur'}]
+                        inputStr:[{required: true, message: '请输入验证码', trigger: 'blur'}]
                      }
             };
         },
         methods:{
+            
             login(formName){
                 this.$refs[formName].validate((valid)=>{
                 if(valid){
-                this.$axios.get("AdminServlet?",{params: this.user})
+                this.$axios.post("checkVerify",{params: this.user.inputStr})
                 .then(res=>{
-                    if(res.data=="OK"){ 
+                if(res.data===true){  
+                this.$axios.get("login.action",{params: this.user})
+                .then(res=>{
+                    if(res.data.errorcode===0){
                         this.$message({message: "登录成功",type: "success"});
                         sessionStorage.setItem('username',JSON.stringify(res.config.params.username));
                         this.$router.push("/AdminMain")
-                                    
                     }else{
-                        alert('用户名或密码不正确,请重新填写')
+                        this.$message.error('用户名或密码不正确，请重新输入');
+                        this.yanzheng();
+                    }
+                 
+                })
+                    }else{
+                        this.yanzheng();
+                        this.$message.error('验证码不正确，请重新输入');
                     }
                     }).catch((error) => {
                     console.log(error);
                     });
                     }else{
                         this.$message.error('验证失败，请重新输入');
-                        this.yanzheng();
                         return false;
 
                     }
             })			
 		},
         yanzheng(){
-            this.imgurl=`http://localhost:8089/End/code?=${Math.random()}`
-            this.$axios.get("code")
+            this.imgurl="http://localhost:8089/shop/admin/getVerify?"+Math.random();//生成一个随机的图片验证码的url地址
+            console.log(this.imgurl); 
         },
         resetForm(formName) {
         this.$refs[formName].resetFields();
