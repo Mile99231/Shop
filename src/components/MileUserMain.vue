@@ -43,6 +43,10 @@
             </div>
 
             </el-main>
+            <el-footer style="">
+                <el-pagination background  layout="prev, pager, next" :total="1000" >
+                </el-pagination>
+            </el-footer>
         </el-container>
     </div>    
     </template>
@@ -107,7 +111,7 @@
             }
             if(c==='d'){
                 if(sessionStorage.getItem("user")!=null){
-                    this.$router.push('/MileUser');
+                    this.$router.push('/MileMyOrder');
                 }else{
                     this.$message.error("请先登录");
                     this.$router.push('/MileLogin');

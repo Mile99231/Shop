@@ -7,6 +7,7 @@
                     <span class="el-dropdown-link" style="margin-left: 1500px;">{{ name }}<i class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="a" >个人信息</el-dropdown-item> 
+                        <el-dropdown-item command="d" >订单信息</el-dropdown-item> 
                         <el-dropdown-item command="b" >退出</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -23,7 +24,7 @@
                     
                     <el-upload
                     class="avatar-uploader"
-                    action="https://jsonplaceholder.typicode.com/posts/"
+                    action="http://localhost:8089/shop/user/upload.action"
                     :show-file-list="false"
                     :on-success="handleAvatarSuccess"
                     :before-upload="beforeAvatarUpload">
@@ -112,6 +113,12 @@
         methods:{
             handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
+        if(res.data.errorcode==1){
+            this.$message({
+                        message: '恭喜你，这是一条成功消息',
+                        type: 'success'
+                    });
+        }
       },
       beforeAvatarUpload(file) {
         const isJPG = file.type === 'image/jpeg';
@@ -138,14 +145,23 @@
             if(c==='b'){
                 this.exit();
             }
+            if(c==='d'){
+                if(sessionStorage.getItem("user")!=null){
+                    this.$router.push('/MileMyOrder');
+                }else{
+                    this.$message.error("请先登录");
+                    this.$router.push('/MileLogin');
+                }
+            }
         },
         // 查询用户信息
         User(){
             this.$axios
-            .get("UserServlet?name="+this.name)
+            .get("User/user.action?uname="+this.name)
             .then(rs=>{
-               this.user=rs.data
-               this.time1=rs.data.ulasttime
+                console.log(rs);
+               this.user=rs.data.data
+               this.time1=rs.data.data.ulasttime
             })
             .catch()
         },

@@ -18,7 +18,7 @@ import axios from 'axios';
 axios.defaults.baseURL="http://localhost:8089/shop/"
 
 Vue.prototype.$axios = axios
-axios.defaults.withCredentials=true;
+// axios.defaults.withCredentials=true;
 
 
 //请求拦截器

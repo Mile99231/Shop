@@ -7,6 +7,7 @@
                     <span class="el-dropdown-link" style="margin-left: 1500px;">{{ user }}<i class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="a" >个人信息</el-dropdown-item> 
+                        <el-dropdown-item command="d" >订单信息</el-dropdown-item> 
                         <el-dropdown-item command="b" >退出</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -64,6 +65,14 @@
                     this.$message.error("请先登录");
                     this.$router.push('/MileLogin');
                 }
+                if(c==='d'){
+                if(sessionStorage.getItem("user")!=null){
+                    this.$router.push('/MileMyOrder');
+                }else{
+                    this.$message.error("请先登录");
+                    this.$router.push('/MileLogin');
+                }
+            }
             }
             if(c==='b'){
                 this.exit();
