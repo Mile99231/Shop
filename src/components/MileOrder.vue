@@ -16,7 +16,7 @@
 
             <!-- //页体 -->
              <el-main style="background-color: #f7a2a2; width: 100%;height: auto; ">
-                <div style="background-color: #f7a2a2; width: 900px; height: 600px; margin-left: 300px; ">
+                <div style="background-color: #f7a2a2; width: 900px; height: 879px; margin-left: 300px; ">
                     <div style="width: 350px; height: 400px; background-color: #601c1c; float: left;"><img :src="this.$route.params.pmainimage" style="width: 350px; height: 400px;"></div>
                     <div style="color: #392121;background-color: #d79191; height: 400px; margin-left: 500px;">
                          <div style="text-align: center;"><h3 >{{ this.$route.params.pname }}</h3></div><br><br>

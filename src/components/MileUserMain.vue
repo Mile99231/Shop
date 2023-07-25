@@ -43,8 +43,15 @@
             </div>
 
             </el-main>
-            <el-footer style="">
-                <el-pagination background  layout="prev, pager, next" :total="1000" >
+            <el-footer  style="height:50px;display: flex;align-items: center;justify-content: center;">
+                <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[5, 10, 15, 20]"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="zongshu">
                 </el-pagination>
             </el-footer>
         </el-container>
@@ -59,7 +66,10 @@
                 page:[],
                 allShopa:[],
                 title:"",
-                name:""
+                name:"",
+                currentPage: 1,
+                pageSize:5,
+                zongshu:-1
             }
         },
         methods:{
@@ -96,6 +106,27 @@
             sessionStorage.clear();
             this.$router.push("/MileLogin");            //跳转到登录MileLogin页面。。。。。。。。。。。。。。
         },
+        //分页查询刷新
+        list(){
+            this.$axios
+            .get("product/page.action",{params:{currpage:this.currentPage,size:this.pageSize}})
+            .then(rs=>{
+                console.log(rs);
+                this.allShopa = rs.data.data
+                this.zongshu=rs.data.size;
+            })
+            .catch()
+        },
+        handleSizeChange(val){
+        //每页显示条数发生改变则触发此函数handleSizeChange，参数val作用当前新的每页条数
+        this.pageSize=val;
+        this.list();
+      },
+      handleCurrentChange(val){
+        //当前页码发生改变则触发此函数handleCurrentChange，参数val作用当前新的页码
+        this.currentPage=val;
+         this.list();
+      },
         // 页头 个人信息
         handleCommand(c){
             if(c==='a'){
@@ -134,6 +165,7 @@
             this.name=JSON.parse(sessionStorage.getItem('user'));            //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
             this.lunbo();
             this.allShop();
+            this.list();
         }
      }
     </script>
