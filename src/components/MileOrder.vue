@@ -7,6 +7,7 @@
                     <span class="el-dropdown-link" style="margin-left: 1500px;">{{ user }}<i class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="a" >个人信息</el-dropdown-item> 
+                        <el-dropdown-item command="d" >订单信息</el-dropdown-item> 
                         <el-dropdown-item command="b" >退出</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -15,7 +16,7 @@
 
             <!-- //页体 -->
              <el-main style="background-color: #f7a2a2; width: 100%;height: auto; ">
-                <div style="background-color: #f7a2a2; width: 900px; height: 600px; margin-left: 300px; ">
+                <div style="background-color: #f7a2a2; width: 900px; height: 879px; margin-left: 300px; ">
                     <div style="width: 350px; height: 400px; background-color: #601c1c; float: left;"><img :src="this.$route.params.pmainimage" style="width: 350px; height: 400px;"></div>
                     <div style="color: #392121;background-color: #d79191; height: 400px; margin-left: 500px;">
                          <div style="text-align: center;"><h3 >{{ this.$route.params.pname }}</h3></div><br><br>
@@ -44,7 +45,8 @@
                 user:"",/*用户名称 */
                 num:1,/*购买数量 */
                 price:this.$route.params.price,/*价格 */
-                dname: this.$route.params.pname/*商品名称 */
+                dname: this.$route.params.pname,/*商品名称 */
+                proid:this.$route.params.proid
 
             }
         },
@@ -63,16 +65,25 @@
                     this.$message.error("请先登录");
                     this.$router.push('/MileLogin');
                 }
+                if(c==='d'){
+                if(sessionStorage.getItem("user")!=null){
+                    this.$router.push('/MileMyOrder');
+                }else{
+                    this.$message.error("请先登录");
+                    this.$router.push('/MileLogin');
+                }
+            }
             }
             if(c==='b'){
                 this.exit();
             }
         },
         addShop(){
-            this.$axios.get("OrderServlet?user="+this.user+"&dname="+this.dname+"&num="+this.num+"&price="+this.price)
+            this.$axios.get("order/add.action?user="+this.user+"&dname="+this.dname+"&num="+this.num+"&price="+this.price+"&proid="+this.proid)
             .then(rs=>{
-                if(rs.data==1){
+                if(rs.data.errorcode==1){
                     this.$message({message: '购买成功',type: 'success'});
+                    console.log(this.proid);
                 }else{
                     this.$message.error("购买失败");
                 }

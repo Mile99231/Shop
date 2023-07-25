@@ -16,7 +16,7 @@ export default {
 <style> 
 #app {
 background: #ffffff;
-
+/* overflow: hidden; */
 }
 *{
  

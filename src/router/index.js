@@ -8,12 +8,17 @@ import MileUserMain from '@/components/MileUserMain'
 import MileOrder from '@/components/MileOrder'
 import AdminMain from '@/components/AdminMain'
 import MileUser from '@/components/MileUser'
+
 import SelAdmin from '@/components/SelAdmin'
 import SelBusiness from '@/components/SelBusiness'
 import SelUser from '@/components/SelUser'
 import BusPro from '@/components/BusPro'
 
 import UpdAdminPwd from '@/components/UpdAdminPwd'
+
+
+import MileMyOrder from '@/components/MileMyOrder'
+import MileUserReg from '@/components/MileUserReg'
 
 Vue.use(Router)
 
@@ -97,6 +102,16 @@ let router= new Router({
       path: '/MileUser',
       name: 'MileUser',
       component: MileUser
+    },
+    {
+      path: '/MileMyOrder',
+      name: 'MileMyOrder',
+      component: MileMyOrder
+    },
+    {
+      path: '/MileUserReg',
+      name: 'MileUserReg',
+      component: MileUserReg
     }
 
   ]

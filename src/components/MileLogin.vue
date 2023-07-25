@@ -1,8 +1,5 @@
 <template>
     <div class="ad">
-        <div class="background" style="height: 100%;">
-            <img src="../assets/e90664acbb424877adfaa40ca21cd35b.jpeg" width="100%" height="100%">
-        </div>
         <div class="login">
             <el-form ref="user" :model="user" label-width="80px">
             <el-form-item prop="loginname" >
@@ -32,10 +29,10 @@ import axios from 'axios';
         },
         methods:{
             login(formName){
-                this.$axios.get("UserLoginServlet?username="+this.user.loginname+"&password="+this.user.pwd)
+                this.$axios.get("User/userLogin.action?uname="+this.user.loginname+"&upwd="+this.user.pwd)
                 .then(rs=>{
                     console.log(rs);
-                    if(rs.data==1){
+                    if(rs.data.errorcode==1){
                         this.$message({
                         message: '登录成功',
                         type: 'success'})
@@ -49,10 +46,7 @@ import axios from 'axios';
           .catch();
             },
             reg(){
-                this.$message({
-          message: '注册成功',
-          type: 'success'
-        });
+                this.$router.push('/MileUserReg');
             }
             
         },
