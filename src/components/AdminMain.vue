@@ -9,7 +9,7 @@
   <!-- <el-button type="info" plain  @click="loginout">退出</el-button> -->
 
   <el-dropdown @command="handleCommand">
-  <span  class="el-dropdown-link">
+  <span class="el-dropdown-link">
     {{loginuser}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
@@ -31,26 +31,20 @@
         class="el-menu-vertical-demo"
          unique-opened :router = 'true'
         :default-active="$route.path"> 
-          <el-menu-item index="/SelAdmin">管理员个人信息</el-menu-item>
-
-          <el-menu-item index="/SelBusiness">商家信息</el-menu-item>
-        
-          <el-menu-item index="SelUser">用户信息</el-menu-item>
-       
-          <!-- <el-submenu v-for="item in menulist" :index="item.id" :key="item.id">
+        <!-- 多级菜单 -->
+          <el-submenu v-for="item in menulist" :index="item.id" :key="item.id">
         <template slot="title">
           <i :class="item.icon"></i>
           <span>{{item.name}}</span>  
-        </template> -->
+        </template> 
         <!-- 二级菜单 -->
-        <!-- <el-menu-item v-for="subItem in item.child" :index="subItem.path" :key="subItem.path">
+        <el-menu-item v-for="subItem in item.child" :index="subItem.path" :key="subItem.path">
           <template slot="title">
           <i :class="subItem.icon"></i>
           <span>{{subItem.name}}</span> 
         </template>
         </el-menu-item>
-
-    </el-submenu> -->
+    </el-submenu>
     </el-menu>
 </el-aside>
 
@@ -75,52 +69,64 @@
             },
             menulist:[
          {
-            name:'商品管理',
+            name:'管理员',
             icon:'el-icon-s-custom',
             id:'1',
             child:[{
-              name:'商品列表',
-              icon:'el-icon-menu',
-              // path:'/user/list'
+              name:'管理员个人信息',
+              icon:'el-icon-s-custom',
+              path:'/SelAdmin'
             },
             {
-              name:'添加商品',
+              name:'修改密码',
               icon:'el-icon-folder-add',
-              // path:'/user/add'
+              path:'/UpdAdminPwd'
             },
-            {
-              name:'商品类别',
-              icon:'el-icon-folder-add',
-              // path:'/user/add' 
-            },
+            // {
+            //   name:'商品类别',
+            //   icon:'el-icon-folder-add',
+            //   path:'/user/add' 
+            // },
            
            
             ]
           },
           {
-            name:'订单管理',
-            icon:'el-icon-s-custom',
+            name:'商家管理',
+            icon:'el-icon-s-goods',
             id:'2',
             child:[{
-              name:'订单列表',
-              icon:'el-icon-menu',
-              // path:'/user/list'
+              name:'商家信息',
+              icon:'el-icon-goods',
+              path:'/SelBusiness'
             },
            
             ]
           },
-          {
-            name:'数据统计',
-            icon:'el-icon-s-custom',
+         {
+            name:'用户管理',
+            icon:'el-icon-coordinate',
             id:'3',
             child:[{
-              name:'销量排行',
-              icon:'el-icon-menu',
-              // path:'/user/list'
+              name:'用户信息',
+              icon:'el-icon-coordinate',
+              path:'/SelUser'
             },
            
             ]
-          }
+          } ,
+          {
+            name:'商品管理',
+            icon:'el-icon-tickets',
+            id:'4',
+            child:[{
+              name:'商品信息',
+              icon:'el-icon-tickets',
+              path:'/BusPro'
+            },
+           
+            ]
+          } 
         ],
             }
         },
@@ -142,7 +148,8 @@
         },
         created(){
          
-     this.loginuser=JSON.parse(sessionStorage.getItem('username'));
+     this.loginuser=JSON.parse(sessionStorage.getItem('name'));
+    //  this.loginuser=JSON.parse(sessionStorage.getItem('username'));
       console.log(this.loginuser);
         }
      }
@@ -167,17 +174,20 @@
     color: #fff;
     font-size: 20px;
      }
-  
+    .el-dropdown{
+      color: #fff;
+    }
+
   .el-aside {
     background-color: #D3DCE6;
-    color: #333;
+    color: #fff;
     text-align: center;
     line-height: 200px;
      }
   
   .el-main {
     background-color: #E9EEF3;
-    color: #333;
+    color:#fff;
     text-align: center;
     line-height: 160px;
      }
