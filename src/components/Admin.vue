@@ -71,6 +71,8 @@
                         this.$message({message: "登录成功",type: "success"});
                         sessionStorage.setItem('name',JSON.stringify(res.data.result.name));
                         sessionStorage.setItem('username',JSON.stringify(res.data.result.username));
+                        sessionStorage.setItem('admin',JSON.stringify(res.data.result));
+                        console.log(res.data.result);
                         this.$router.push("/AdminMain")
                     }else{
                         this.$message.error('用户名或密码不正确，请重新输入');
