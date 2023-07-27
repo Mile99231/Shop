@@ -4,7 +4,7 @@
             <!-- //页头 -->
             <el-header style="width: auto; height: 50px; background: #faa148;padding: 0px;">
                 <el-dropdown @command="handleCommand" >
-                    <span class="el-dropdown-link" style="margin-left: 1500px;">{{ user }}<i class="el-icon-arrow-down el-icon--right"></i></span>
+                    <span class="el-dropdown-link" style="margin-left: 1500px;">{{ this.paya.duser }}<i class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="a" >个人信息</el-dropdown-item> 
                         <el-dropdown-item command="d" >订单信息</el-dropdown-item> 
@@ -24,9 +24,9 @@
                         <div style="text-align: center;"><h4>剩余数量:{{ this.$route.params.pstock }}辆</h4></div><br><br>
                         <div style="text-align: center;">在售状态{{ this.$route.params.status }}</div><br><br>
                         <template>
-                            <el-input-number v-model="num" :min="1" :max="10" label="描述文字" style="margin-left: 110px;"></el-input-number>
+                            <el-input-number v-model="paya.dsum" :min="1" :max="10" label="描述文字" style="margin-left: 110px;"></el-input-number>
                         </template><br><br><br>
-                        <el-button type="success" @click="addShop" style="margin-left: 150px;">购买</el-button>
+                        <el-button type="success" @click="pay()" style="margin-left: 150px;">购买</el-button>
                     </div>
                 </div>
 
@@ -42,11 +42,15 @@
             return{
                 page:[],
                 allShopa:[],
-                user:"",/*用户名称 */
-                num:1,/*购买数量 */
-                price:this.$route.params.price,/*价格 */
-                dname: this.$route.params.pname,/*商品名称 */
-                proid:this.$route.params.proid
+                
+                paya:{
+                subject:this.$route.params.pname,         /*订单名称 */
+                dprice:this.$route.params.price,    /*付款金额 */
+                dsum:1, 
+                proid:this.$route.params.proid, 
+                duser:"",/*用户名称 */
+                // body:''             /*商品描述 */
+        }
 
             }
         },
@@ -89,11 +93,22 @@
                 }
             })
             .catch()
-        }
+        },    
+        pay(){
+            console.log(this.paya);
+                 this.$axios.post("alipay",this.paya).then((res)=>{
+                    console.log(res.data);
+                    document.querySelector('body').innerHTML = res.data;//查找到当前页面的body，将后台返回的form替换掉他的内容
+                    document.forms[0].submit();  //执行submit表单提交，让页面重定向，跳转到支付宝页面
+
+                  }).catch(error=>{
+                    console.log(error);
+                  })
+    }
 
         },
         created(){
-            this.user=JSON.parse(sessionStorage.getItem('user'));      //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
+            this.paya.duser=JSON.parse(sessionStorage.getItem('user'));      //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
         }
      }
     </script>
