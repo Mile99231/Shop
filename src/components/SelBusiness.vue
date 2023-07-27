@@ -122,6 +122,7 @@
 			del(row){
 				this.$axios.get("admin/DelBusiness.action?bid="+row.bid)
                 .then(res=>{
+					console.log(row);
 					if(res.data.errorcode===0){
 						this.$message({
           							showClose: true,
