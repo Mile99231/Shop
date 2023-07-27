@@ -62,14 +62,15 @@
             login(formName){
                 this.$refs[formName].validate((valid)=>{
                 if(valid){
-                this.$axios.post("checkVerify",{params: this.user.inputStr})
+                this.$axios.post("admin/checkVerify",{params: this.user.inputStr})
                 .then(res=>{
                 if(res.data===true){  
-                this.$axios.get("login.action",{params: this.user})
+                this.$axios.get("admin/login.action",{params: this.user})
                 .then(res=>{
                     if(res.data.errorcode===0){
                         this.$message({message: "登录成功",type: "success"});
-                        sessionStorage.setItem('username',JSON.stringify(res.config.params.username));
+                        sessionStorage.setItem('name',JSON.stringify(res.data.result.name));
+                        sessionStorage.setItem('username',JSON.stringify(res.data.result.username));
                         this.$router.push("/AdminMain")
                     }else{
                         this.$message.error('用户名或密码不正确，请重新输入');

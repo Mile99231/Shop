@@ -8,8 +8,18 @@ import MileUserMain from '@/components/MileUserMain'
 import MileOrder from '@/components/MileOrder'
 import AdminMain from '@/components/AdminMain'
 import MileUser from '@/components/MileUser'
+
+import SelAdmin from '@/components/SelAdmin'
+import SelBusiness from '@/components/SelBusiness'
+import SelUser from '@/components/SelUser'
+import BusPro from '@/components/BusPro'
+
+import UpdAdminPwd from '@/components/UpdAdminPwd'
+
+
 import MileMyOrder from '@/components/MileMyOrder'
 import MileUserReg from '@/components/MileUserReg'
+
 Vue.use(Router)
 
 const originalPush = Router.prototype.push
@@ -35,6 +45,38 @@ let router= new Router({
       path: '/AdminMain',
       name: 'AdminMain',
       component: AdminMain,
+      children:[ 
+        {path: '/SelAdmin',name: 'SelAdmin',component: SelAdmin,},
+        {path: '/SelBusiness',name: 'SelBusiness',component: SelBusiness,},
+        {path: '/SelUser',name: 'SelUser',component: SelUser,},
+        {path: '/BusPro',name: 'BusPro',component: BusPro,},
+        {path: '/UpdAdminPwd',name: 'UpdAdminPwd',component: UpdAdminPwd,},
+      ]
+    },
+    {
+      path: '/SelAdmin',
+      name: 'SelAdmin',
+      component: SelAdmin,
+    },
+    {
+      path: '/UpdAdminPwd',
+      name: 'UpdAdminPwd',
+      component: UpdAdminPwd,
+    },
+    {
+      path: '/SelBusiness',
+      name: 'SelBusiness',
+      component: SelBusiness,
+    },
+    {
+      path: '/SelUser',
+      name: 'SelUser',
+      component: SelUser,
+    },
+    {
+      path: '/BusPro',
+      name: 'BusPro',
+      component: BusPro,
     },
     {
       path: '/MileLogin',

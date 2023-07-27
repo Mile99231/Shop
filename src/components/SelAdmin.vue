@@ -42,9 +42,9 @@
 				<el-form-item label="账号" :label-width="formLabelWidth">
 				  <el-input  v-model="AdminInfos.username"  autocomplete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="密码" :label-width="formLabelWidth">
+				<!-- <el-form-item label="密码" :label-width="formLabelWidth">
 				  <el-input v-model="AdminInfos.password"  autocomplete="off"></el-input>
-				</el-form-item>
+				</el-form-item> -->
 				<el-form-item label="姓名" :label-width="formLabelWidth">
 				  <el-input v-model="AdminInfos.name"  autocomplete="off"></el-input>
 				</el-form-item>
@@ -116,9 +116,9 @@
 				      label="操作"
 					  width="171">
 				      <template slot-scope="scope">
-				        <el-button @click="del(scope.row)" type="info" size="small">删除</el-button>
+				        <el-button @click="del(scope.row)" type="danger" icon="el-icon-delete" circle size="small"/>
 						<!-- 修改管理员信息 -->
-				        <el-button @click="upd(scope.row)" type="info" size="small">修改</el-button>
+				        <el-button @click="upd(scope.row)" type="primary" icon="el-icon-edit" circle size="small"/>
 				      </template>
 			
 				    </el-table-column>
@@ -152,7 +152,7 @@
         methods:{
 			//查询所有
             sel(){
-                this.$axios.get("SelAdmin.action")
+                this.$axios.get("admin/SelAdmin.action")
                 .then(res=>{
                     this.AdminInfo=res.data;
                     console.log(res.data);
@@ -160,7 +160,7 @@
             },
 			//删除
 			del(row){
-				this.$axios.get("DelAdmin.action?id="+row.id)
+				this.$axios.get("admin/DelAdmin.action?id="+row.id)
                 .then(res=>{
 					if(res.data.errorcode===0){
 						this.$message({
@@ -175,7 +175,7 @@
 			},
 			//执行修改操作
 			update(){
-				this.$axios.post("UpdAdmin.action",this.AdminInfos)
+				this.$axios.post("admin/UpdAdmin.action",this.AdminInfos)
                 .then(res=>{
 				if(res.data.errorcode===0){
 				    this.$message({
@@ -196,7 +196,7 @@
 			},
 				//添加
 				addInfo(){
-				this.$axios.post("AddAdmin.action",this.AdminInfos)
+				this.$axios.post("admin/AddAdmin.action",this.AdminInfos)
                 .then(res=>{
 				if(res.data.errorcode===0){
 				
