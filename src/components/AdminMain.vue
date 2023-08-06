@@ -82,11 +82,11 @@
               icon:'el-icon-folder-add',
               path:'/UpdAdminPwd'
             },
-            // {
-            //   name:'商品类别',
-            //   icon:'el-icon-folder-add',
-            //   path:'/user/add' 
-            // },
+            {
+              name:'头像',
+              icon:'el-icon-folder-add',
+              path:'/z' 
+            },
            
            
             ]
@@ -200,4 +200,5 @@
     cursor: pointer;
     letter-spacing: 0.3em;
   }
+  
 </style>

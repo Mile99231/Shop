@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import Admin from '@/components/Admin'
 import MileLogin from '@/components/MileLogin'
 import MileShopLogin from '@/components/MileShopLogin'
@@ -13,7 +12,6 @@ import SelAdmin from '@/components/SelAdmin'
 import SelBusiness from '@/components/SelBusiness'
 import SelUser from '@/components/SelUser'
 import BusPro from '@/components/BusPro'
-
 import UpdAdminPwd from '@/components/UpdAdminPwd'
 
 import MileGwc from '@/components/MileGwc'
@@ -33,11 +31,6 @@ Router.prototype.push = function push(location) {
 let router= new Router({
   mode:"history",
   routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
     {
       path: '/Admin',
       name: 'Admin',
@@ -126,7 +119,7 @@ let router= new Router({
 }) 
 //路由守卫
 router.beforeEach((to,from,next)=>{
-  if(to.path === '/login' || to.path=== '/' ){
+  if(to.path === '/Admin' || to.path=== '/' ){
     next();
 
   }else{

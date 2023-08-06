@@ -17,7 +17,7 @@ import axios from 'axios';
 
 //axios请求地址公有路径 
 axios.defaults.baseURL="http://localhost:8089/shop/"
-
+axios.defaults.withCredentials=true
 
 Vue.prototype.$axios = axios
 // axios.defaults.withCredentials=true;
