@@ -16,9 +16,11 @@ import BusPro from '@/components/BusPro'
 
 import UpdAdminPwd from '@/components/UpdAdminPwd'
 
-
+import MileGwc from '@/components/MileGwc'
 import MileMyOrder from '@/components/MileMyOrder'
 import MileUserReg from '@/components/MileUserReg'
+
+
 
 Vue.use(Router)
 
@@ -112,6 +114,12 @@ let router= new Router({
       path: '/MileUserReg',
       name: 'MileUserReg',
       component: MileUserReg
+    }
+    ,
+    {
+      path: '/MileGwc',
+      name: 'MileGwc',
+      component: MileGwc
     }
 
   ]

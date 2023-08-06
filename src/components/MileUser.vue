@@ -6,8 +6,10 @@
                 <el-dropdown @command="handleCommand" >
                     <span class="el-dropdown-link" style="margin-left: 1500px;">{{ name }}<i class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item command="e" >主页</el-dropdown-item>
                         <el-dropdown-item command="a" >个人信息</el-dropdown-item> 
                         <el-dropdown-item command="d" >订单信息</el-dropdown-item> 
+                        <el-dropdown-item command="f" >购物车</el-dropdown-item> 
                         <el-dropdown-item command="b" >退出</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -200,8 +202,24 @@
                     this.$router.push('/MileLogin');
                 }
             }
+            if(c==='e'){
+                if(sessionStorage.getItem("user")!=null){
+                    this.$router.push('/MileUserMain');
+                }else{
+                    this.$message.error("请先登录");
+                    this.$router.push('/MileLogin');
+                }
+            }
+            if(c==='f'){
+                if(sessionStorage.getItem("user")!=null){
+                    this.$router.push('/MileGwc');
+                }else{
+                    this.$message.error("请先登录");
+                    this.$router.push('/MileLogin');
+                }
+            }
         },
-        // 查询用户信息
+        // 查询用户信息 
         User(){
             this.$axios
             .get("User/user.action?uname="+this.name)

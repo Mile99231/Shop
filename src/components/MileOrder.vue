@@ -6,8 +6,10 @@
                 <el-dropdown @command="handleCommand" >
                     <span class="el-dropdown-link" style="margin-left: 1500px;">{{ this.paya.duser }}<i class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item command="e" >主页</el-dropdown-item> 
                         <el-dropdown-item command="a" >个人信息</el-dropdown-item> 
                         <el-dropdown-item command="d" >订单信息</el-dropdown-item> 
+                        <el-dropdown-item command="f" >购物车</el-dropdown-item> 
                         <el-dropdown-item command="b" >退出</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -26,7 +28,8 @@
                         <template>
                             <el-input-number v-model="paya.dsum" :min="1" :max="10" label="描述文字" style="margin-left: 110px;"></el-input-number>
                         </template><br><br><br>
-                        <el-button type="success" @click="pay()" style="margin-left: 150px;">购买</el-button>
+                        <el-button type="success" @click="pay()" style="margin-left: 100px;">购买</el-button>
+                        <el-button type="success" @click="addGwc()">加入购物车</el-button>
                     </div>
                 </div>
 
@@ -50,7 +53,13 @@
                 proid:this.$route.params.proid, 
                 duser:"",/*用户名称 */
                 // body:''             /*商品描述 */
-        }
+                    },
+                    gwc:{
+                        gname:this.$route.params.pname,
+                        gprice:this.$route.params.price,
+                        gnum:"",
+                        guser:""
+                    }
 
             }
         },
@@ -81,6 +90,23 @@
             if(c==='b'){
                 this.exit();
             }
+            if(c==='e'){
+                if(sessionStorage.getItem("user")!=null){
+                    this.$router.push('/MileUserMain');
+                }else{
+                    this.$message.error("请先登录");
+                    this.$router.push('/MileLogin');
+                }
+            }
+            if(c==='f'){
+                if(sessionStorage.getItem("user")!=null){
+                    this.$router.push('/MileGwc');
+                }else{
+                    this.$message.error("请先登录");
+                    this.$router.push('/MileLogin');
+                }
+            }
+            
         },
         addShop(){
             this.$axios.get("order/add.action?user="+this.user+"&dname="+this.dname+"&num="+this.num+"&price="+this.price+"&proid="+this.proid)
@@ -95,7 +121,6 @@
             .catch()
         },    
         pay(){
-            console.log(this.paya);
                  this.$axios.post("alipay",this.paya).then((res)=>{
                     console.log(res.data);
                     document.querySelector('body').innerHTML = res.data;//查找到当前页面的body，将后台返回的form替换掉他的内容
@@ -104,11 +129,24 @@
                   }).catch(error=>{
                     console.log(error);
                   })
-    }
+            },
+            addGwc(){
+                this.gwc.gnum=this.paya.dsum
+                this.$axios.post("gwc/add.action",this.gwc)
+            .then(rs=>{
+                if(rs.data.errorcode==0){
+                    this.$message({message: '添加成功',type: 'success'});
+                }else{
+                    this.$message.error("购买失败");
+                }
+            })
+            .catch()
+            }
 
         },
         created(){
             this.paya.duser=JSON.parse(sessionStorage.getItem('user'));      //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
+            this.gwc.guser=JSON.parse(sessionStorage.getItem('user'));      //获取用户名称。。。。。。。。。。。。。。。。。。。。。。。。
         }
      }
     </script>
